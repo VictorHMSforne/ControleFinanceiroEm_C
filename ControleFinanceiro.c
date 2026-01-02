@@ -30,9 +30,8 @@ void menu() {
             printf("\nOpção: ");
             scanf("%d", &opcao);
 
-            while (getchar() != '\n'); // limpa ENTER do buffer
-
             if (opcao < 1 || opcao > 6) {
+            	while (getchar() != '\n'); // limpa ENTER do buffer
                 printf("Opção inválida!\n");
                 printf("Pressione ENTER para continuar...");
                 getchar();
