@@ -14,12 +14,20 @@ struct dadosDespesa{
 void cadastroDespesa() {
     system("cls");
     
-    //
+    /* LEMBRETE: PONTEIRO NÃO É COISA AVANÇADA
+    // É SÓ UMA VARIÁVEL QUE GUARDA O ENDEREÇO DE OUTRA
+    
+    & Pega/localiza o endereço da memória
+    * Acessa o valor naquele endereço, podendo: criar e depois acessar.
+    -> Quando o ponteiro aponta para um atributo da struct
+    
+    
     time_t segundos; // Aqui vai ser guardado a quantidade de segundos que se passaram desde 01/01/1970
     struct tm *dataAtual; // Tipo de dado que guarda uma data completa, desde: Dia até minuto
     
     segundos = time(NULL); // Solicita que horas são(no caso segundos) para a função
     dataAtual = localtime(&segundos); // Aqui é passado o segundos como parâmetro para transformar em data atual do computador
+    
     
     printf("%02d / %02d / %04d  %02d:%02d\n", 
 			dataAtual ->tm_mday, 
@@ -28,6 +36,13 @@ void cadastroDespesa() {
 			dataAtual ->tm_hour, 
 			dataAtual ->tm_min);
     //%02d formatação dos números, ou seja, completa com 0 caso não tenha nada, mostrando assim 2 dígitos ou 4
+    
+    */
+    
+    
+    
+    
+    
     
     
 	SetConsoleTextAttribute(saidaConsole, 12);
