@@ -1,13 +1,47 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <windows.h> 
+#include <time.h>
 
-void teste() {
+HANDLE saidaConsole; // Para Manipular o console de saída
+
+struct dadosDespesa{
+	
+};
+
+
+void cadastroDespesa() {
     system("cls");
+    
+    //
+    time_t segundos; // Aqui vai ser guardado a quantidade de segundos que se passaram desde 01/01/1970
+    struct tm *dataAtual; // Tipo de dado que guarda uma data completa, desde: Dia até minuto
+    
+    segundos = time(NULL); // Solicita que horas são(no caso segundos) para a função
+    dataAtual = localtime(&segundos); // Aqui é passado o segundos como parâmetro para transformar em data atual do computador
+    
+    printf("%02d / %02d / %04d  %02d:%02d\n", 
+			dataAtual ->tm_mday, 
+			dataAtual ->tm_mon + 1, 
+			dataAtual ->tm_year + 1900, 
+			dataAtual ->tm_hour, 
+			dataAtual ->tm_min);
+    //%02d formatação dos números, ou seja, completa com 0 caso não tenha nada, mostrando assim 2 dígitos ou 4
+    
+    
+	SetConsoleTextAttribute(saidaConsole, 12);
+	
+    printf("+--------------------------------+\n");
+    printf("|      Cadastro de Despesas      |\n");
+    printf("+--------------------------------+\n");
+    SetConsoleTextAttribute(saidaConsole, 7);
     printf("Testando!\n");
+    
     printf("Pressione ENTER para voltar...");
-    while (getchar() != '\n'); // limpa buffer
-    getchar();                 // espera ENTER
+    
+    while (getchar() != '\n'); 
+    getchar();                 
 }
 
 void menu() {
@@ -41,7 +75,7 @@ void menu() {
 
         switch (opcao) {
             case 1:
-                teste();
+                cadastroDespesa();
                 break;
             case 2:
                 break;
@@ -58,6 +92,7 @@ void menu() {
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
+    saidaConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     menu();
     return 0;
 }
