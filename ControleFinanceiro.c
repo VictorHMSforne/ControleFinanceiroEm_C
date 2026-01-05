@@ -7,7 +7,8 @@
 HANDLE saidaConsole; // Para Manipular o console de saída
 
 struct dadosDespesa{
-	
+	int Id;
+	char Descricao[50];
 };
 
 
@@ -39,10 +40,7 @@ void cadastroDespesa() {
     
     */
     
-    
-    
-    
-    
+    struct dadosDespesa despesas; //Supostamente instancia de um objeto
     
     
 	SetConsoleTextAttribute(saidaConsole, 12);
@@ -51,7 +49,10 @@ void cadastroDespesa() {
     printf("|      Cadastro de Despesas      |\n");
     printf("+--------------------------------+\n");
     SetConsoleTextAttribute(saidaConsole, 7);
-    printf("Testando!\n");
+    
+    printf("Digite uma descrição: \n");
+    fgets(despesas.Descricao, sizeof(despesas.Descricao), stdin);
+    despesas.Descricao[strcspn(despesas.Descricao,"\n")] = '\0';
     
     printf("Pressione ENTER para voltar...");
     
