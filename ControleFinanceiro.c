@@ -42,6 +42,8 @@ void cadastroDespesa() {
     
     struct dadosDespesa despesas; //Supostamente instancia de um objeto
     
+    FILE *arquivo;
+    
     
 	SetConsoleTextAttribute(saidaConsole, 12);
 	
@@ -50,13 +52,22 @@ void cadastroDespesa() {
     printf("+--------------------------------+\n");
     SetConsoleTextAttribute(saidaConsole, 7);
     
+    arquivo = fopen("arquivoDeDespesas.txt","W");
+    
+    if(arquivo == NULL)
+    	printf("Não foi possível criar o arquivo!");
+    
+    while (getchar() != '\n');
+    
     printf("Digite uma descrição: \n");
     fgets(despesas.Descricao, sizeof(despesas.Descricao), stdin);
     despesas.Descricao[strcspn(despesas.Descricao,"\n")] = '\0';
     
+    printf("%s\n", despesas.Descricao);
+    
     printf("Pressione ENTER para voltar...");
     
-    while (getchar() != '\n'); 
+     
     getchar();                 
 }
 
