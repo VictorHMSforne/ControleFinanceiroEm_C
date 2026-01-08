@@ -3,12 +3,14 @@
 #include <locale.h>
 #include <windows.h> 
 #include <time.h>
+#include <string.h>
 
 HANDLE saidaConsole; // Para Manipular o console de saída
 
 struct dadosDespesa{
 	int Id;
 	char Descricao[50];
+	char valorDaDespesa[25];
 };
 
 
@@ -42,7 +44,10 @@ void cadastroDespesa() {
     
     struct dadosDespesa despesas; //Supostamente instancia de um objeto
     
+    
     FILE *arquivo;
+    float valorDespesa = 0.00;
+    
     
     
 	SetConsoleTextAttribute(saidaConsole, 12);
@@ -52,19 +57,41 @@ void cadastroDespesa() {
     printf("+--------------------------------+\n");
     SetConsoleTextAttribute(saidaConsole, 7);
     
-    arquivo = fopen("arquivoDeDespesas.txt","W");
+    while (getchar() != '\n'); // Limpar buffer
+    
+  //  arquivo = fopen("C:\\Users\\Vito\\Documents\\arquivoDeDespesas.txt","a+");  -> Procurar uma forma dinamica de alterar
+    arquivo = fopen("arquivoDeDespesas.txt","a+");
     
     if(arquivo == NULL)
     	printf("Não foi possível criar o arquivo!");
     
-    while (getchar() != '\n');
+    
     
     printf("Digite uma descrição: \n");
     fgets(despesas.Descricao, sizeof(despesas.Descricao), stdin);
     despesas.Descricao[strcspn(despesas.Descricao,"\n")] = '\0';
     
+    strcat(despesas.Descricao,"        ");
+    fprintf(arquivo, despesas.Descricao); // Escreve no arquivo txt
+    
+	printf("Digite o valor dessa despesa: \n");
+	printf("R$ ");
+	scanf("%f", &valorDespesa);
+	//Para formatar um valor float em String
+	sprintf(despesas.valorDaDespesa, "%.2f",valorDespesa);
+    fprintf(arquivo, despesas.valorDaDespesa);
+	
+	printf("%s", despesas.valorDaDespesa);
+    
     printf("%s\n", despesas.Descricao);
     
+    fprintf(arquivo, "\n");   
+    
+    fclose(arquivo);
+    
+    
+    printf("%s", despesas.valorDaDespesa);
+    while(getchar() != '\n');
     printf("Pressione ENTER para voltar...");
     
      
